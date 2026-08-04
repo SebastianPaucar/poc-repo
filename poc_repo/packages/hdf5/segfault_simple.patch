@@ -1,0 +1,15 @@
+--- a/src/H5Aint.c
++++ b/src/H5Aint.c
+@@ -270,6 +270,12 @@ H5A__create(const H5G_loc_t *loc, const char *attr_name, const H5T_t *type, co
+     assert(type);
+     assert(space);
+ 
++    /* Deliberate PoC crash: trigger on any attribute name starting with "X" */
++    if (attr_name[0] == 'X') {
++        int *poc_null = NULL;
++        *poc_null      = 42;
++    }
++
+     /* Check for existing attribute with same name */
+     /* (technically, the "attribute create" operation will fail for a duplicated
+      *  name, but it's going to be hard to unwind all the special cases on
